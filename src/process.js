@@ -5,29 +5,33 @@ if (scrollY !== 0) {
     let aval = scrollY/640 * maxalphnav;
     nvcolor.setAttribute('style', `background: rgba(0,0,0,${aval < maxalphnav ? aval : maxalphnav});`)
 }
-const furl = location.href;
-const target = `#${furl.split('#')[1]}nav`
-const factive = document.querySelector(target);
-factive.parentElement.classList.add('activelink');
-navbar.addEventListener('click', e => {
-    console.log(e.target.tagName);
-    console.log(e.target.classList);
-    if (e.target.tagName === "SPAN") {
-        const activelink = document.querySelector('.activelink');
-        activelink.classList.remove('activelink');
-        e.target.parentElement.parentElement.classList.add('activelink');
-    } else if (e.target.classList.contains('nav-link')) {
-        const activelink = document.querySelector('.activelink');
-        activelink.classList.remove('activelink');
-        e.target.parentElement.classList.add('activelink');
-    }
-})
-
+let param = document.querySelector('#info').getBoundingClientRect().y;
+if (param > -841 && param <= 0) {
+    document.querySelector('#infonav').parentElement.classList.add('activelink');
+} else if(param > 0) {
+    document.querySelector('#nav').parentElement.classList.add('activelink');
+} else {
+    document.querySelector('#tautannav').parentElement.classList.add('activelink');
+}
 window.addEventListener('scroll', () => {
+    param = document.querySelector('#info').getBoundingClientRect().y;
     if (scrollY !== 0) {
         let aval = scrollY/640 * maxalphnav;
         nvcolor.setAttribute('style', `background: rgba(0,0,0,${aval < maxalphnav ? aval : maxalphnav});`)
     } else {
         nvcolor.setAttribute('style', 'background: rgba(0,0,0,0);')
+    }
+    if (param > -841 && param <= 0) {
+        const activelink = document.querySelector('.activelink');
+        activelink.classList.remove('activelink');
+        document.querySelector('#infonav').parentElement.classList.add('activelink');
+    } else if(param > 0) {
+        const activelink = document.querySelector('.activelink');
+        activelink.classList.remove('activelink');
+        document.querySelector('#nav').parentElement.classList.add('activelink');
+    } else {
+        const activelink = document.querySelector('.activelink');
+        activelink.classList.remove('activelink');
+        document.querySelector('#tautannav').parentElement.classList.add('activelink');
     }
 });
