@@ -3,7 +3,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 .navbar {
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0);
 }
 .navbar-brand img {
     height: 2rem;
